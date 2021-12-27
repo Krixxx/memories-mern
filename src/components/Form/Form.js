@@ -19,7 +19,7 @@ const Form = ({ currentId, setCurrentId }) => {
   });
 
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.find((message) => message._id === currentId) : null
   );
 
   const classes = useStyles();
@@ -32,22 +32,8 @@ const Form = ({ currentId, setCurrentId }) => {
     if (post) setPostData(post);
   }, [post]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (currentId) {
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
-    } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
-    }
-
-    clear();
-  };
-
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({
       title: '',
       message: '',
@@ -56,7 +42,21 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
-  if (!user?.result.name) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      clear();
+    } else {
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
+      clear();
+    }
+  };
+
+  if (!user?.result?.name) {
     return (
       <Paper className={classes.paper}>
         <Typography variant='h6' align='center'>

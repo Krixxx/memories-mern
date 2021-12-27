@@ -5,15 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import { getPosts } from '../../actions/posts';
 
-import useStyles from '../../styles';
-
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 
 const Home = () => {
-  const [currentId, setCurrentId] = useState(null);
-
-  const classes = useStyles();
+  const [currentId, setCurrentId] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -26,7 +22,6 @@ const Home = () => {
       <Container>
         <Grid
           container
-          className={classes.mainContainer}
           justifyContent='space-between'
           alignItems='stretch'
           spacing={3}

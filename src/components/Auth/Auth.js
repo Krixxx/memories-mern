@@ -172,6 +172,10 @@ const Auth = () => {
           </Grid>
         </form>
       </Paper>
+      <div>
+        <p>Demo email: demo@demo.demo</p>
+        <p>Demo password: 123456</p>
+      </div>
     </Container>
   );
 };
