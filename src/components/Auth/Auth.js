@@ -6,7 +6,6 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from '@material-ui/core';
 
 import { GoogleLogin } from 'react-google-login';
@@ -81,7 +80,6 @@ const Auth = () => {
   };
 
   const googleFailure = (error) => {
-    console.log(error);
     console.log('Google Sign In was unsuccessful. Try again later.');
   };
 
