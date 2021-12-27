@@ -13,7 +13,7 @@ const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); //we need location so we can trigger useEffect, when location changes from '/auth' to '/'.
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
