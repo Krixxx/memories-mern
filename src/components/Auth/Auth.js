@@ -11,6 +11,12 @@ import {
 
 import { GoogleLogin } from 'react-google-login';
 
+import { useDispatch } from 'react-redux';
+
+import { AUTH } from '../../constants/actionTypes';
+
+import { useNavigate } from 'react-router-dom';
+
 import Icon from './icon';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
@@ -20,8 +26,11 @@ import Input from './Input';
 
 const Auth = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -37,7 +46,17 @@ const Auth = () => {
   };
 
   const googleSuccess = async (response) => {
-    console.log(response);
+    const result = response?.profileObj; //question mark prevents throwing an error. It just gives undefined, if object does not exist.
+
+    const token = response?.tokenId;
+
+    try {
+      dispatch({ type: AUTH, data: { result, token } });
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const googleFailure = (error) => {
