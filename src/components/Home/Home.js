@@ -44,7 +44,7 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   const searchPost = () => {
-    if (search.trim()) {
+    if (search.trim() || tags) {
       //dispatch -> fetch search post
       dispatch(getPostsBySearch({ search, tags: tags.join(',') })); //we convert tags array to a string, separated by comma.
     } else {
