@@ -75,11 +75,11 @@ const PostDetails = () => {
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant='body1'>
-            <strong>Realtime Chat - coming soon!</strong>
+            <strong>Placeholder</strong>
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant='body1'>
-            <strong>Comments - coming soon!</strong>
+            <strong>Placeholder</strong>
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
         </div>
@@ -104,7 +104,7 @@ const PostDetails = () => {
             {recommendedPosts.map(
               ({ title, message, name, likes, selectedFile, _id }) => (
                 <div
-                  style={{ margin: '20px', cursor: 'pointer' }}
+                  style={{ margin: '20px', cursor: 'pointer', width: '400px' }}
                   onClick={() => openPost(_id)}
                   key={_id}
                 >

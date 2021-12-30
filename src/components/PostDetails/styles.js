@@ -5,7 +5,8 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     objectFit: 'cover',
     width: '100%',
-    maxHeight: '600px',
+    maxWidth: '400px',
+    maxHeight: '400px',
   },
   card: {
     display: 'flex',
@@ -28,8 +29,8 @@ export default makeStyles((theme) => ({
   },
   recommendedPosts: {
     display: 'flex',
-    width: '400px',
-    alignItems: 'stretch',
+    width: 'auto',
+    overflow: 'hidden',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
