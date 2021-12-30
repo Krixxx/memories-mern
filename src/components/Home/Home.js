@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
-import { getPosts } from '../../actions/posts';
+import { getPosts, getPostsBySearch } from '../../actions/posts';
 
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
@@ -46,6 +46,7 @@ const Home = () => {
   const searchPost = () => {
     if (search.trim()) {
       //dispatch -> fetch search post
+      dispatch(getPostsBySearch({ search, tags: tags.join(',') })); //we convert tags array to a string, separated by comma.
     } else {
       navigate('/');
     }
