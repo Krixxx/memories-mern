@@ -59,6 +59,7 @@ const Home = () => {
     if (e.keyCode === 13) {
       //search for the post
       searchPost();
+      console.log('enter');
     }
   };
 
@@ -92,7 +93,7 @@ const Home = () => {
                 name='search'
                 variant='outlined'
                 label='Search Memories'
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 fullWidth
                 value={search}
                 onChange={(e) => {
