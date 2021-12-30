@@ -29,6 +29,8 @@ const Form = ({ currentId, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
+    if (!post?.title) clear();
+
     if (post) setPostData(post);
   }, [post]);
 
@@ -67,7 +69,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete='off'
         noValidate
