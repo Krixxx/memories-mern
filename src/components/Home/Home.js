@@ -47,6 +47,9 @@ const Home = () => {
     if (search.trim() || tags) {
       //dispatch -> fetch search post
       dispatch(getPostsBySearch({ search, tags: tags.join(',') })); //we convert tags array to a string, separated by comma.
+      navigate(
+        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join('.')} `
+      );
     } else {
       navigate('/');
     }
