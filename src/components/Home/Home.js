@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Grow,
@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
@@ -34,14 +34,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const query = useQuery();
   const navigate = useNavigate();
-  const page = query.get('page' || 1); // get page number from URL parameter or set default 1
+  const page = query.get('page') || 1; // get page number from URL parameter or set default 1
   const searchQuery = query.get('searchQuery'); // get search query from URL parameters
 
   const classes = useStyles();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -119,7 +115,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>
