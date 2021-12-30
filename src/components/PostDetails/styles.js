@@ -28,6 +28,8 @@ export default makeStyles((theme) => ({
   },
   recommendedPosts: {
     display: 'flex',
+    width: '400px',
+    alignItems: 'stretch',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
