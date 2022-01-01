@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 
 import { AUTH } from '../../constants/actionTypes';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import Icon from './icon';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -41,6 +41,8 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialState);
 
   const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -84,97 +86,102 @@ const Auth = () => {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography variant='h5'>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            {isSignup && (
-              <>
-                <Input
-                  name='firstName'
-                  label='First Name'
-                  handleChange={handleChange}
-                  autoFocus
-                  half
-                />
-                <Input
-                  name='lastName'
-                  label='Last Name'
-                  handleChange={handleChange}
-                  half
-                />
-              </>
-            )}
-            <Input
-              name='email'
-              label='Email Address'
-              handleChange={handleChange}
-              type='email'
-            />
-            <Input
-              name='password'
-              label='Password'
-              handleChange={handleChange}
-              type={showPassword ? 'text' : 'password'}
-              handleShowPassword={handleShowPassword}
-            />
-            {isSignup && (
-              <Input
-                name='confirmPassword'
-                label='Repeat Password'
-                handleChange={handleChange}
-                type='password'
-              />
-            )}
-          </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-          >
+    <>
+      {user && <Navigate to='/posts' />}
+      <Container component='main' maxWidth='xs'>
+        <Paper className={classes.paper} elevation={3}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant='h5'>
             {isSignup ? 'Sign Up' : 'Sign In'}
-          </Button>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color='primary'
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant='contained'
-              >
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy='single_host_origin'
-          />
-          <Grid container justifyContent='flex-end'>
-            <Grid item>
-              <Button onClick={switchMode}>
-                {isSignup
-                  ? 'Already have an account? Sign In'
-                  : "Don't have an account? Sign Up"}
-              </Button>
+          </Typography>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              {isSignup && (
+                <>
+                  <Input
+                    name='firstName'
+                    label='First Name'
+                    handleChange={handleChange}
+                    autoFocus
+                    half
+                  />
+                  <Input
+                    name='lastName'
+                    label='Last Name'
+                    handleChange={handleChange}
+                    half
+                  />
+                </>
+              )}
+              <Input
+                name='email'
+                label='Email Address'
+                handleChange={handleChange}
+                type='email'
+              />
+              <Input
+                name='password'
+                label='Password'
+                handleChange={handleChange}
+                type={showPassword ? 'text' : 'password'}
+                handleShowPassword={handleShowPassword}
+              />
+              {isSignup && (
+                <Input
+                  name='confirmPassword'
+                  label='Repeat Password'
+                  handleChange={handleChange}
+                  type='password'
+                />
+              )}
             </Grid>
-          </Grid>
-        </form>
-      </Paper>
-      <div>
-        <p>Demo email: demo@demo.demo</p>
-        <p>Demo password: 123456</p>
-      </div>
-    </Container>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+            >
+              {isSignup ? 'Sign Up' : 'Sign In'}
+            </Button>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              render={(renderProps) => (
+                <Button
+                  className={classes.googleButton}
+                  color='primary'
+                  fullWidth
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  startIcon={<Icon />}
+                  variant='contained'
+                >
+                  Google Sign In
+                </Button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy='single_host_origin'
+            />
+            <Grid container justifyContent='flex-end'>
+              <Grid item>
+                <Button onClick={switchMode}>
+                  {isSignup
+                    ? 'Already have an account? Sign In'
+                    : "Don't have an account? Sign Up"}
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+        <div>
+          <p>Demo email: demo@demo.demo</p>
+          <p>Demo password: 123456</p>
+        </div>
+      </Container>
+    </>
   );
 };
 

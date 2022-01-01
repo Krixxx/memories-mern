@@ -101,10 +101,16 @@ const PostDetails = () => {
           </Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(
-              ({ title, message, name, likes, selectedFile, _id }) => (
+            {recommendedPosts
+              .slice(0, 5) //show only first 5 recommendations
+              .map(({ title, message, name, likes, selectedFile, _id }) => (
                 <div
-                  style={{ margin: '20px', cursor: 'pointer', width: '400px' }}
+                  style={{
+                    margin: '20px',
+                    cursor: 'pointer',
+                    display: 'block',
+                    width: '200px',
+                  }}
                   onClick={() => openPost(_id)}
                   key={_id}
                 >
@@ -122,8 +128,7 @@ const PostDetails = () => {
                   </Typography>
                   <img src={selectedFile} width='200px' />
                 </div>
-              )
-            )}
+              ))}
           </div>
         </div>
       )}

@@ -7,9 +7,9 @@ export default makeStyles((theme) => ({
     margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'stretch',
-    padding: '10px 50px',
+    // padding: '10px 50px',
   },
   heading: {
     color: 'rgba(0,183,255, 1)',
