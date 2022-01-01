@@ -11,6 +11,8 @@ import moment from 'moment';
 
 import { useParams, useNavigate } from 'react-router-dom';
 
+import CommentSection from './CommentSection';
+
 import { getPost, getPostsBySearch } from '../../actions/posts';
 
 import useStyles from './styles';
@@ -78,9 +80,7 @@ const PostDetails = () => {
             <strong>Placeholder</strong>
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant='body1'>
-            <strong>Placeholder</strong>
-          </Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
