@@ -11,6 +11,8 @@ import App from './App';
 
 import './index.css';
 
+//create redux store with reducers and apply middeware 'thunk'.
+//We need thunk to return functions, rather than actions, within Redux.
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDom.render(

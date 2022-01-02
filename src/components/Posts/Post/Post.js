@@ -32,21 +32,29 @@ const Post = ({ post, setCurrentId }) => {
 
   const [likes, setLikes] = useState(post?.likes);
 
+  //get user from localStorage
   const user = JSON.parse(localStorage.getItem('profile'));
+  //get user id from either user googleId or from user _id
   const userId = user?.result.googleId || user?.result?._id;
 
+  //check, if current user has liked post
   const hasLikedPost = post.likes.find((like) => like === userId);
 
+  //handle Like button click
   const handleLike = async () => {
+    //dispatch post like data to redux
     dispatch(likePost(post._id));
 
     if (hasLikedPost) {
+      //remove user like from likes array
       setLikes(post.likes.filter((id) => id !== userId));
     } else {
+      //add user like to likes array
       setLikes([...post.likes, userId]);
     }
   };
 
+  //Likes button icon logic
   const Likes = () => {
     if (likes.length > 0) {
       return likes.find((like) => like === userId) ? (
@@ -73,6 +81,7 @@ const Post = ({ post, setCurrentId }) => {
     );
   };
 
+  //open post when clicked on it
   const openPost = (e) => {
     // dispatch(getPost(post._id, history));
 

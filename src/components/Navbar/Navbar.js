@@ -20,14 +20,19 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation(); //we need location so we can trigger useEffect, when location changes from '/auth' to '/'.
 
+  //log user out
   const logout = () => {
+    //dispatch LOGOUT action directly to reducer. This clears all user data from state
     dispatch({ type: LOGOUT });
 
+    //Go to auth page
     navigate('/auth');
 
+    //set user to null
     setUser(null);
   };
 
+  //check for user token when location changes. If there is token and token is valid, we set user state form localStorage. If token is not valid or has expired, we use logout() function.
   useEffect(() => {
     const token = user?.token;
 

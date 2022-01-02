@@ -13,8 +13,6 @@ import Auth from './components/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
 
 const App = () => {
-  const user = JSON.parse(localStorage.getItem('profile'));
-
   return (
     <Router>
       <Container maxWidth='xl'>
@@ -24,11 +22,6 @@ const App = () => {
           <Route path='/posts' exact element={<Home />} />
           <Route path='/posts/search' exact element={<Home />} />
           <Route path='/posts/:id' exact element={<PostDetails />} />
-          {/* <Route
-            path='/auth'
-            exact
-            element={!user ? <Auth /> : <Navigate to='/posts' />}
-          /> */}
           <Route path='/auth' exact element={<Auth />} />
         </Routes>
       </Container>

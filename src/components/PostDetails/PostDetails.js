@@ -18,17 +18,20 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const PostDetails = () => {
+  //get post, posts and isLoading state from redux
   const { post, posts, isLoading } = useSelector((state) => state.posts);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
-  const { id } = useParams();
+  const { id } = useParams(); //get post id from url parameters
 
+  //get post data when rendering postDetails component
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
 
+  //get suggested posts by using current post tags as search parameters
   useEffect(() => {
     if (post) {
       dispatch(
@@ -39,6 +42,7 @@ const PostDetails = () => {
 
   if (!post) return null;
 
+  //show circular progressbar when redux isLoading state is true
   if (isLoading) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
@@ -47,8 +51,10 @@ const PostDetails = () => {
     );
   }
 
+  //recommended posts array, where current post is filtered out.
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
+  //when user clicks on recommended post, then we navigate to this post page
   const openPost = (_id) => {
     navigate(`/posts/${_id}`);
   };

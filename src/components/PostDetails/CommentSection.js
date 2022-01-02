@@ -8,23 +8,33 @@ import useStyles from './styles';
 import { commentPost } from '../../actions/posts';
 
 const CommentSection = ({ post }) => {
+  //get user data from
   const user = JSON.parse(localStorage.getItem('profile'));
 
   const dispatch = useDispatch();
   const classes = useStyles();
   const commentsRef = useRef();
 
+  //all comments state
   const [comments, setComments] = useState(post?.comments);
+
+  //current comment state
   const [comment, setComment] = useState('');
 
+  //function to handle COMMENT button click
   const handleClick = async () => {
+    //set finalComment in following format 'UserName: Comment'
     const finalComment = `${user.result.name}: ${comment}`;
 
+    //get new comments array from redux state. This is why we returned new comments array from posts actions.
     const newComments = await dispatch(commentPost(finalComment, post._id));
 
+    //set new comments array to comments state
     setComments(newComments);
+    //clear current comment
     setComment('');
 
+    //since new comments go to the bottom of comments div, we use useRef hooks to scroll to current div after submitting comment
     commentsRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 

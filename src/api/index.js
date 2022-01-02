@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+//set up axios with base URL
 const API = axios.create({ baseURL: process.env.REACT_APP_API_URI });
 
+//if we have set profile to localStorage,then we can add Authorization token to our requests, for authenticating user server side.
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
     req.headers.Authorization = `Bearer ${
@@ -11,6 +13,7 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
+
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 export const fetchPostsBySearch = (searchQuery) =>

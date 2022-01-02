@@ -13,6 +13,7 @@ import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
+  //default postData empty state
   const [postData, setPostData] = useState({
     title: '',
     message: '',
@@ -20,6 +21,7 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
 
+  //get post from redux post state, in case there is currentId for current user
   const post = useSelector((state) =>
     currentId
       ? state.posts.posts.find((message) => message._id === currentId)
@@ -30,14 +32,19 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //get user from localStorage
   const user = JSON.parse(localStorage.getItem('profile'));
 
+  //useEffect for pre-loading form data if we need to edit post
   useEffect(() => {
+    //if there is no post title, then clear all
     if (!post?.title) clear();
 
+    //if there is a post, then setPostData state
     if (post) setPostData(post);
   }, [post]);
 
+  //clear function. Set currentId to zero and clear post data
   const clear = () => {
     setCurrentId(0);
     setPostData({
@@ -51,17 +58,23 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //if currentId is 0, then it means we create post, but if there is Id, then it means we want to edit post
     if (currentId === 0) {
+      //dispatch createPost action to redux.
       dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
+      //clear all
       clear();
     } else {
+      //dispatch updatePost action to redux.
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
+      //clear data
       clear();
     }
   };
 
+  //If there is no user name in localStorage, we display "Please sign in" form
   if (!user?.result?.name) {
     return (
       <Paper className={classes.paper} elevation={6}>

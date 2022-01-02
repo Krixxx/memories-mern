@@ -25,6 +25,7 @@ import Input from './Input';
 
 import { signin, signup } from '../../actions/auth';
 
+//set up our initial, empty state
 const initialState = {
   firstName: '',
   lastName: '',
@@ -42,45 +43,56 @@ const Auth = () => {
 
   const dispatch = useDispatch();
 
+  //get user from localStorage
   const user = JSON.parse(localStorage.getItem('profile'));
 
+  //toggle showPassword state
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  //handle our submit. In case of sign in or sign up.
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (isSignup) {
+      //dispatch sign up data to auth actions
       dispatch(signup(formData, navigate));
     } else {
+      //dispatch sign in data to auth actions
       dispatch(signin(formData, navigate));
     }
   };
 
+  //controlled state handler
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  //toggle between sign up and sign in
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     handleShowPassword(false);
   };
 
+  //in case of successful google login. We get response from react-google-login library and pass it in as response. profileObj is our user profile and token is user token. We then access auth reducer directly, without auth action and dispatch user data to state.
   const googleSuccess = async (response) => {
     const result = response?.profileObj; //question mark prevents throwing an error. It just gives undefined, if object does not exist.
 
     const token = response?.tokenId;
 
     try {
+      //dispatch user data directly to state
       dispatch({ type: AUTH, data: { result, token } });
 
+      //navigate to home page after successful login
       navigate('/');
     } catch (error) {
       console.log(error);
     }
   };
 
+  //if google auth failes, show error in log.
   const googleFailure = (error) => {
     console.log('Google Sign In was unsuccessful. Try again later.');
   };
