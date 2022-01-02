@@ -4,12 +4,15 @@ import { deepPurple } from '@material-ui/core/colors';
 export default makeStyles((theme) => ({
   mainContainer: {
     borderRadius: 15,
-    margin: '30px 0',
+    // margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',
     // justifyContent: 'space-between',
     alignItems: 'stretch',
     // padding: '10px 50px',
+    [theme.breakpoints.down('xs')]: {
+      // margin: '0 auto',
+    },
   },
   heading: {
     color: 'rgba(0,183,255, 1)',
