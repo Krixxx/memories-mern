@@ -89,7 +89,7 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   return (
-    <Card className={classes.card} raised elevation={6}>
+    <Card data-test-id='card' className={classes.card} raised elevation={6}>
       <ButtonBase
         component='span'
         className={classes.cardAction}
@@ -126,7 +126,12 @@ const Post = ({ post, setCurrentId }) => {
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
         </div>
-        <Typography className={classes.title} variant='h5' gutterBottom>
+        <Typography
+          data-test-id='card-title'
+          className={classes.title}
+          variant='h5'
+          gutterBottom
+        >
           {post.title}
         </Typography>
         <CardContent>
@@ -140,6 +145,7 @@ const Post = ({ post, setCurrentId }) => {
           size='small'
           color='primary'
           disabled={!user?.result}
+          data-test-id='like-button'
           onClick={handleLike}
         >
           <Likes />
@@ -149,6 +155,7 @@ const Post = ({ post, setCurrentId }) => {
           <Button
             size='small'
             color='primary'
+            data-test-id='delete-button'
             onClick={() => {
               dispatch(deletePost(post._id));
             }}

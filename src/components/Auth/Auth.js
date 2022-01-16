@@ -135,6 +135,7 @@ const Auth = () => {
               />
               <Input
                 name='password'
+                id='Password'
                 label='Password'
                 handleChange={handleChange}
                 type={showPassword ? 'text' : 'password'}
@@ -152,6 +153,7 @@ const Auth = () => {
             <Button
               type='submit'
               fullWidth
+              data-test-id='login-button'
               variant='contained'
               color='primary'
               className={classes.submit}

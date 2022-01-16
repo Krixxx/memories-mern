@@ -7,6 +7,7 @@ import VisibilitityOff from '@material-ui/icons/VisibilityOff';
 
 const Input = ({
   name,
+  id,
   handleChange,
   label,
   autoFocus,
@@ -18,9 +19,11 @@ const Input = ({
     <Grid item xs={12} sm={half ? 6 : 12}>
       <TextField
         name={name}
+        id={id}
         onChange={handleChange}
         variant='outlined'
         required
+        role={name}
         fullWidth
         label={label}
         autoFocus={autoFocus}

@@ -99,6 +99,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='title'
           variant='outlined'
+          data-test-id='title'
           label='Title'
           fullWidth
           value={postData.title}
@@ -108,6 +109,7 @@ const Form = ({ currentId, setCurrentId }) => {
           name='message'
           variant='outlined'
           label='Message'
+          data-test-id='message'
           multiline
           rows={4}
           fullWidth
@@ -120,6 +122,7 @@ const Form = ({ currentId, setCurrentId }) => {
           name='tags'
           variant='outlined'
           label='Tags'
+          data-test-id='tags'
           fullWidth
           value={postData.tags}
           onChange={(e) =>

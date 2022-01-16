@@ -88,6 +88,7 @@ const Home = () => {
               <TextField
                 name='search'
                 variant='outlined'
+                data-test-id='search-form'
                 label='Search Memories'
                 onKeyDown={handleKeyPress}
                 fullWidth
